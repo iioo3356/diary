@@ -89,6 +89,7 @@ export const Calendar = () => {
                 key={dIdx}
                 className={clsx(
                   "w-full h-[120px] border-r border-stone-300 first:border-l text-center",
+                  "hover:bg-stone-200/50",
                 )}
               >
                 <div
