@@ -1,13 +1,12 @@
 import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 
 export const Calendar = () => {
-  const currentDay = dayjs();
+  const currentDay = dayjs().set("date", 1);
 
-  const [selectedBasics, setSelectedBasics] = useState(
-    currentDay.set("date", 1),
-  );
+  const [selectedBasics, setSelectedBasics] = useState(currentDay);
 
   const calendarWeeks = useMemo(() => {
     const startOfMonth = selectedBasics.startOf("month"); // 선택된 달의 첫번째 날
@@ -33,30 +32,41 @@ export const Calendar = () => {
     return weeks;
   }, [selectedBasics]);
 
-  // TODO: 오늘로 이동하는 버튼
+  const handleOnPrev = () => {
+    setSelectedBasics((prev) => prev.add(-1, "month"));
+  };
+
+  const handleOnGoToday = () => {
+    setSelectedBasics(currentDay);
+  };
+
+  const handleOnNext = () => {
+    setSelectedBasics((prev) => prev.add(1, "month"));
+  };
+
   // TODO: 전체 월 선택 버튼
   // TODO: 한국 공휴일 연동하기
 
   return (
     <div className="flex flex-col gap-[16px] items-center">
-      <div className="flex gap-[8px] items-center">
-        <button
-          className="!p-[4px]"
-          onClick={() => {
-            setSelectedBasics((prev) => prev.add(-1, "month"));
-          }}
-        >
-          {"<"}
-        </button>
-        <div className="font-bold text-[20px]">
-          {selectedBasics.format("YY년 M월")}
+      <div className="flex justify-between w-full px-[16px]">
+        <div className="w-[30px]">&nbsp;</div>
+        <div className="flex gap-[8px] items-center">
+          <button className="!p-[4px]" onClick={handleOnPrev}>
+            <ChevronLeft />
+          </button>
+          <div className="font-bold text-[20px] w-[100px] text-center">
+            {selectedBasics.format("YY년 M월")}
+          </div>
+          <button onClick={handleOnNext}>
+            <ChevronRight />
+          </button>
         </div>
         <button
-          onClick={() => {
-            setSelectedBasics((prev) => prev.add(1, "month"));
-          }}
+          className="w-[30px] text-right font-semibold text-stone-600 text-[14px]"
+          onClick={handleOnGoToday}
         >
-          {">"}
+          오늘
         </button>
       </div>
       <div className="flex flex-col w-full">
