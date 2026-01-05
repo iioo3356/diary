@@ -8,10 +8,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
   color: #282828;
 }
 
@@ -20,5 +16,6 @@ body {
   a {
     all: unset;
     cursor: pointer;
+    box-sizing: border-box;
   }
 }
