@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Button from "../components/Button";
 import { Calendar } from "../components/Calendar";
 
-export const Route = createFileRoute("/main")({
+export const Route = createFileRoute("/")({
   component: RouteComponent,
 });
 
