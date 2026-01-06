@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import clsx from "clsx";
 
 import Button from "../components/Button";
@@ -13,9 +13,11 @@ function RouteComponent() {
     <div className="relative pb-[60px]">
       <div>검색</div>
       <Calendar />
-      <Button className={clsx(`fixed bottom-0 w-full max-w-lg`)}>
-        기록하기
-      </Button>
+      <Link to="/write">
+        <Button className={clsx(`fixed bottom-0 w-full max-w-lg`)}>
+          기록하기
+        </Button>
+      </Link>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -9,6 +10,7 @@ function RootComponent() {
     <div className="bg-stone-200 w-screen">
       <div className={`w-full max-w-lg mx-auto min-h-screen bg-stone-100`}>
         <Outlet />
+        <TanStackRouterDevtools />
       </div>
     </div>
   );
