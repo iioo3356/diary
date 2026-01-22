@@ -3,7 +3,11 @@ import dayjs, { Dayjs } from "dayjs";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 
-export const Calendar = () => {
+export const Calendar = ({
+  diaryList,
+}: {
+  diaryList?: { [key: string]: string[] | null };
+}) => {
   const currentDay = dayjs().set("date", 1);
 
   const [selectedBasics, setSelectedBasics] = useState(currentDay);
@@ -88,8 +92,8 @@ export const Calendar = () => {
               <div
                 key={dIdx}
                 className={clsx(
-                  "w-full h-[120px] border-r border-stone-300 first:border-l text-center",
-                  "hover:bg-stone-200/50",
+                  "w-full h-[120px] flex flex-col  border-r border-stone-300 first:border-l text-center",
+                  // "hover:bg-stone-200/50",
                 )}
               >
                 <div
@@ -107,6 +111,31 @@ export const Calendar = () => {
                 >
                   {day.date()}
                 </div>
+                <button
+                  className={clsx(
+                    "h-full cursor-pointer hover:bg-stone-200/50",
+                    "flex flex-col gap-[2px]",
+                  )}
+                >
+                  {diaryList?.[day.format("YYYY-MM-DD")]
+                    ?.slice(0, 4)
+                    ?.map((diary, index) => (
+                      <div
+                        className={clsx(
+                          index % 2 === 0 ? "bg-stone-200" : "bg-stone-300",
+                          "text-[13px] pl-[2px] text-left line-clamp-1",
+                        )}
+                      >
+                        {diary}
+                      </div>
+                    ))}
+                  {(diaryList?.[day.format("YYYY-MM-DD")] || []).length > 4 && (
+                    <div className="text-[12px] text-right">
+                      +
+                      {(diaryList?.[day.format("YYYY-MM-DD")] || []).length - 4}
+                    </div>
+                  )}
+                </button>
               </div>
             ))}
           </div>
