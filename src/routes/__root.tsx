@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import clsx from "clsx";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -8,9 +8,14 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <div className="bg-stone-200 w-screen">
-      <div className={`w-full max-w-lg mx-auto min-h-screen bg-stone-100`}>
+      <div
+        className={clsx(
+          `w-full max-w-lg mx-auto min-h-screen bg-stone-100`,
+          "pt-[49px]",
+        )}
+      >
         <Outlet />
-        <TanStackRouterDevtools />
+        {/* <TanStackRouterDevtools /> */}
       </div>
     </div>
   );

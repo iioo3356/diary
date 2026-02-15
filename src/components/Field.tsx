@@ -10,9 +10,12 @@ interface FieldProps {
 
 const Field = ({ label, field, children }: FieldProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-[16px]">
       {label && (
-        <label className="text-[12px]" htmlFor={field.name}>
+        <label
+          className="text-[12px] text-sky-900 leading-[32px]"
+          htmlFor={field.name}
+        >
           {label}
         </label>
       )}

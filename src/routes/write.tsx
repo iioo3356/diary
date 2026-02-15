@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 import Button from "../components/Button";
 import Field from "../components/Field";
+import { Header } from "../components/Header";
 import Input from "../components/Input";
 import TextArea from "../components/TextArea";
 
@@ -16,8 +17,8 @@ function RouteComponent() {
   const form = useForm({
     defaultValues: {
       date: dayjs().format("YYYY-MM-DD"),
-      title: "일기",
-      content: "오늘은...",
+      title: "",
+      content: "",
     },
     onSubmit: ({ value }) => {
       console.log(value);
@@ -26,14 +27,23 @@ function RouteComponent() {
 
   return (
     <div>
+      <Header title="기록 작성" prefix="back" />
       <form
-        className="p-[16px]"
+        className="pb-[59px]"
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }}
       >
-        <div className="flex flex-col gap-[16px]">
+        <div
+          className="flex flex-col gap-[32px] bg-local"
+          style={{
+            backgroundImage: `
+linear-gradient(to right, var(--color-stone-200) 10px, transparent 10px),
+linear-gradient(to left, var(--color-stone-200) 10px, transparent 10px),
+repeating-linear-gradient(var(--color-stone-200), var(--color-stone-200) 31px, var(--color-stone-400) 31px, var(--color-stone-400) 32px)`,
+          }}
+        >
           <form.Field
             name="date"
             children={(field) => (
@@ -46,7 +56,7 @@ function RouteComponent() {
             name="title"
             children={(field) => (
               <Field label="제목" field={field}>
-                <Input />
+                <TextArea rows={1} placeholder="제목을 입력해 주세요." />
               </Field>
             )}
           />
@@ -54,7 +64,10 @@ function RouteComponent() {
             name="content"
             children={(field) => (
               <Field label="내용" field={field}>
-                <TextArea />
+                <TextArea
+                  className="min-h-[500px]"
+                  placeholder="내용을 작성해주세요."
+                />
               </Field>
             )}
           />
