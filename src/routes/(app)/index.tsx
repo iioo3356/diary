@@ -2,11 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { Pencil, Search } from "lucide-react";
 
-import Button from "../components/Button";
-import { Calendar } from "../components/Calendar";
-import { Header } from "../components/Header";
+import { Button, Calendar, Header } from "@/components";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/(app)/")({
   component: RouteComponent,
 });
 

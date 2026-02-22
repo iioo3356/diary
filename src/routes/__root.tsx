@@ -7,15 +7,11 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <div className="bg-stone-200 w-screen">
+    <div className="bg-white w-screen">
       <div
-        className={clsx(
-          `w-full max-w-lg mx-auto min-h-screen bg-stone-100`,
-          "pt-[49px]",
-        )}
+        className={clsx(`w-full max-w-lg mx-auto min-h-screen bg-stone-100`)}
       >
         <Outlet />
-        {/* <TanStackRouterDevtools /> */}
       </div>
     </div>
   );

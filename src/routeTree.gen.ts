@@ -9,68 +9,154 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WriteRouteImport } from './routes/write'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as appRouteRouteImport } from './routes/(app)/route'
+import { Route as appIndexRouteImport } from './routes/(app)/index'
+import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
+import { Route as AuthInitRouteImport } from './routes/auth/init'
+import { Route as AuthGoogleRouteImport } from './routes/auth/google'
+import { Route as appWriteRouteImport } from './routes/(app)/write'
 
-const WriteRoute = WriteRouteImport.update({
-  id: '/write',
-  path: '/write',
+const appRouteRoute = appRouteRouteImport.update({
+  id: '/(app)',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const appIndexRoute = appIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const AuthSignInRoute = AuthSignInRouteImport.update({
+  id: '/auth/sign-in',
+  path: '/auth/sign-in',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthInitRoute = AuthInitRouteImport.update({
+  id: '/auth/init',
+  path: '/auth/init',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthGoogleRoute = AuthGoogleRouteImport.update({
+  id: '/auth/google',
+  path: '/auth/google',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appWriteRoute = appWriteRouteImport.update({
+  id: '/write',
+  path: '/write',
+  getParentRoute: () => appRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/write': typeof WriteRoute
+  '/write': typeof appWriteRoute
+  '/auth/google': typeof AuthGoogleRoute
+  '/auth/init': typeof AuthInitRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/': typeof appIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/write': typeof WriteRoute
+  '/write': typeof appWriteRoute
+  '/auth/google': typeof AuthGoogleRoute
+  '/auth/init': typeof AuthInitRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/': typeof appIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/write': typeof WriteRoute
+  '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/write': typeof appWriteRoute
+  '/auth/google': typeof AuthGoogleRoute
+  '/auth/init': typeof AuthInitRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/(app)/': typeof appIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/write'
+  fullPaths: '/write' | '/auth/google' | '/auth/init' | '/auth/sign-in' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/write'
-  id: '__root__' | '/' | '/write'
+  to: '/write' | '/auth/google' | '/auth/init' | '/auth/sign-in' | '/'
+  id:
+    | '__root__'
+    | '/(app)'
+    | '/(app)/write'
+    | '/auth/google'
+    | '/auth/init'
+    | '/auth/sign-in'
+    | '/(app)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  WriteRoute: typeof WriteRoute
+  appRouteRoute: typeof appRouteRouteWithChildren
+  AuthGoogleRoute: typeof AuthGoogleRoute
+  AuthInitRoute: typeof AuthInitRoute
+  AuthSignInRoute: typeof AuthSignInRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/write': {
-      id: '/write'
-      path: '/write'
-      fullPath: '/write'
-      preLoaderRoute: typeof WriteRouteImport
+    '/(app)': {
+      id: '/(app)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(app)/': {
+      id: '/(app)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof appIndexRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/auth/sign-in': {
+      id: '/auth/sign-in'
+      path: '/auth/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auth/init': {
+      id: '/auth/init'
+      path: '/auth/init'
+      fullPath: '/auth/init'
+      preLoaderRoute: typeof AuthInitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/google': {
+      id: '/auth/google'
+      path: '/auth/google'
+      fullPath: '/auth/google'
+      preLoaderRoute: typeof AuthGoogleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/write': {
+      id: '/(app)/write'
+      path: '/write'
+      fullPath: '/write'
+      preLoaderRoute: typeof appWriteRouteImport
+      parentRoute: typeof appRouteRoute
     }
   }
 }
 
+interface appRouteRouteChildren {
+  appWriteRoute: typeof appWriteRoute
+  appIndexRoute: typeof appIndexRoute
+}
+
+const appRouteRouteChildren: appRouteRouteChildren = {
+  appWriteRoute: appWriteRoute,
+  appIndexRoute: appIndexRoute,
+}
+
+const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
+  appRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  WriteRoute: WriteRoute,
+  appRouteRoute: appRouteRouteWithChildren,
+  AuthGoogleRoute: AuthGoogleRoute,
+  AuthInitRoute: AuthInitRoute,
+  AuthSignInRoute: AuthSignInRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,18 +6,19 @@ interface FieldProps {
   label?: string;
   children: ReactElement<InputHTMLAttributes<HTMLInputElement>>;
   field: AnyFieldApi;
+  requiredMark?: boolean;
 }
 
-const Field = ({ label, field, children }: FieldProps) => {
+export const Field = ({ label, field, children, requiredMark }: FieldProps) => {
   return (
     <div className="flex flex-col px-[16px]">
       {label && (
-        <label
-          className="text-[12px] text-sky-900 leading-[32px]"
-          htmlFor={field.name}
-        >
-          {label}
-        </label>
+        <div className="text-[12px] leading-[32px] flex gap-[2px]">
+          <label className="text-sky-900" htmlFor={field.name}>
+            {label}
+          </label>
+          {requiredMark && <span className="text-red-600">*</span>}
+        </div>
       )}
       {cloneElement(children, {
         id: field.name,
@@ -30,5 +31,3 @@ const Field = ({ label, field, children }: FieldProps) => {
     </div>
   );
 };
-
-export default Field;

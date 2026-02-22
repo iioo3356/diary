@@ -9,6 +9,7 @@
 body {
   margin: 0;
   color: #282828;
+  background-color: var(--color-stone-100);
 }
 
 @layer base {
@@ -18,4 +19,8 @@ body {
     cursor: pointer;
     box-sizing: border-box;
   }
+}
+
+@theme {
+  --font-roboto: "Roboto", arial, sans-serif;
 }

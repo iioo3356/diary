@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-const TextArea = ({ className, ...rest }: TextAreaProps) => {
+export const TextArea = ({ className, ...rest }: TextAreaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = () => {
@@ -26,5 +26,3 @@ const TextArea = ({ className, ...rest }: TextAreaProps) => {
     />
   );
 };
-
-export default TextArea;

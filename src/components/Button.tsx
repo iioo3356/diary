@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ className, children, ...rest }: ButtonProps) => {
+export const Button = ({ className, children, ...rest }: ButtonProps) => {
   return (
     <button
       className={clsx(
@@ -17,5 +17,3 @@ const Button = ({ className, children, ...rest }: ButtonProps) => {
     </button>
   );
 };
-
-export default Button;
