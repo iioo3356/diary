@@ -1,0 +1,3 @@
+{{>licenseInfo}}
+export * from './api';
+{{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}";{{/withSeparateModelsAndApi}}

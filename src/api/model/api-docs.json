@@ -1,0 +1,54 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "OpenAPI definition", "version": "v0" },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Generated server url" }
+  ],
+  "paths": {
+    "/members/me": {
+      "get": {
+        "tags": ["member-controller"],
+        "operationId": "getMyMemberInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseMemberResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiResponseMemberResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "result": { "$ref": "#/components/schemas/MemberResponse" }
+        }
+      },
+      "MemberResponse": {
+        "type": "object",
+        "properties": {
+          "memberNo": { "type": "integer", "format": "int64" },
+          "provider": { "type": "string" },
+          "providerId": { "type": "string" },
+          "email": { "type": "string" },
+          "memberState": {
+            "type": "string",
+            "enum": ["OAUTH_ONLY", "NORMAL", "SUSPENDED", "DELETED"]
+          },
+          "hint1": { "type": "string" },
+          "hint2": { "type": "string" },
+          "createDt": { "type": "string" }
+        }
+      }
+    }
+  }
+}
