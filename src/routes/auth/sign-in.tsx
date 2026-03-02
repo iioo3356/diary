@@ -10,7 +10,7 @@ function RouteComponent() {
   return (
     <div className="min-h-screen px-[20px] flex flex-col gap-[40px] items-center justify-center">
       <div className="flex items-center justify-center">
-        <div className="font-black text-6xl text-center">
+        <div className="font-eutman font-black text-6xl text-center">
           BLACK
           <br />
           LOG
