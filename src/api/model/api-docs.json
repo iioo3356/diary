@@ -5,6 +5,30 @@
     { "url": "http://localhost:8080", "description": "Generated server url" }
   ],
   "paths": {
+    "/members/me/secret": {
+      "post": {
+        "tags": ["member-controller"],
+        "operationId": "postMySecret",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostMeSecretRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ApiResponseUnit" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/members/me": {
       "get": {
         "tags": ["member-controller"],
@@ -26,6 +50,17 @@
   },
   "components": {
     "schemas": {
+      "PostMeSecretRequest": {
+        "type": "object",
+        "properties": {
+          "hint1": { "type": "string" },
+          "hint2": { "type": "string" }
+        }
+      },
+      "ApiResponseUnit": {
+        "type": "object",
+        "properties": { "message": { "type": "string" } }
+      },
       "ApiResponseMemberResponse": {
         "type": "object",
         "properties": {
@@ -44,6 +79,8 @@
             "type": "string",
             "enum": ["OAUTH_ONLY", "NORMAL", "SUSPENDED", "DELETED"]
           },
+          "termsAgreed": { "type": "boolean" },
+          "privacyAgreed": { "type": "boolean" },
           "hint1": { "type": "string" },
           "hint2": { "type": "string" },
           "createDt": { "type": "string" }

@@ -32,6 +32,19 @@ export interface ApiResponseMemberResponse {
 /**
  *
  * @export
+ * @interface ApiResponseUnit
+ */
+export interface ApiResponseUnit {
+  /**
+   *
+   * @type {string}
+   * @memberof ApiResponseUnit
+   */
+  message?: string;
+}
+/**
+ *
+ * @export
  * @interface MemberResponse
  */
 export interface MemberResponse {
@@ -67,6 +80,18 @@ export interface MemberResponse {
   memberState?: MemberResponseMemberStateEnum;
   /**
    *
+   * @type {boolean}
+   * @memberof MemberResponse
+   */
+  termsAgreed?: boolean;
+  /**
+   *
+   * @type {boolean}
+   * @memberof MemberResponse
+   */
+  privacyAgreed?: boolean;
+  /**
+   *
    * @type {string}
    * @memberof MemberResponse
    */
@@ -90,3 +115,23 @@ export type MemberResponseMemberStateEnum =
   | "NORMAL"
   | "SUSPENDED"
   | "DELETED";
+
+/**
+ *
+ * @export
+ * @interface PostMeSecretRequest
+ */
+export interface PostMeSecretRequest {
+  /**
+   *
+   * @type {string}
+   * @memberof PostMeSecretRequest
+   */
+  hint1?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PostMeSecretRequest
+   */
+  hint2?: string;
+}

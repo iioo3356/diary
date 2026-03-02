@@ -17,7 +17,7 @@ function RouteComponent() {
     if (data?.result?.memberState === "OAUTH_ONLY") {
       navigate({ to: "/auth/init", replace: true });
     } else if (data?.result?.memberState === "NORMAL") {
-      // 메인 화면 이동
+      navigate({ to: "/", replace: true });
     } else {
       // 중지 및 탈퇴 페이지로 이동
     }

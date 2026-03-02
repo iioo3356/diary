@@ -1,4 +1,6 @@
 api.ts
 docs/ApiResponseMemberResponse.md
+docs/ApiResponseUnit.md
 docs/MemberResponse.md
+docs/PostMeSecretRequest.md
 index.ts
